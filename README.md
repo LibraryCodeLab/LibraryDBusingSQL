@@ -2,7 +2,7 @@
 
 In this exercise, we will download an existing database that includes a list of library books and library users. 
 
-1. Download the LibraryDatabase.db from the <a href="https://github.com/LibraryCodeLab">Codelab Github</a>.  
+1. Download the <a href="https://github.com/LibraryCodeLab/LibraryDBusingSQL/blob/master/LibraryDatabase.db">LibraryDatabase.db</a> from the <a href="https://github.com/LibraryCodeLab">Codelab Github</a>.  
 
 2. Go to <a href="www.sqlliteonline.com">sqlliteonline.com</a> and select File > Open DB and choose the LibraryDatabase.db file. 
 
