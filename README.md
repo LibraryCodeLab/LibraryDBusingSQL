@@ -8,11 +8,11 @@ In this exercise, we will download an existing database that includes a list of 
 
 3. First, use your SELECT command to see what is in the database. 
 
-         <b>SELECT</b> * <b>FROM</b> Books; 
+         SELECT * FROM Books; 
 
 4. Use the WHERE command to filter based on a condition: 
 
-         <b>SELECT</b> * <b>FROM</b> Books <b>WHERE</b> Collection=”gna”; 
+         SELECT * FROM Books WHERE Collection=”gna”; 
 
 5. Add a new user to your Users database (leave Book field blank). 
 
