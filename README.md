@@ -4,15 +4,15 @@ In this exercise, we will download an existing database that includes a list of 
 
 1. Download the Library.db from the <a href="https://github.com/LibraryCodeLab">Codelab Github</a>.  
 
-2. Go to <a href="www.sqlliteonline.com>sqlliteonline.com</a> and select File > Open DB and choose the Library.db file. 
+2. Go to <a href="www.sqlliteonline.com">sqlliteonline.com</a> and select File > Open DB and choose the Library.db file. 
 
 3. First, use your SELECT command to see what is in the database. 
 
-<b>SELECT</b> * <b>FROM</b> Books; 
+         <b>SELECT</b> * <b>FROM</b> Books; 
 
 4. Use the WHERE command to filter based on a condition: 
 
-<b>SELECT</b> * <b>FROM</b> Books <b>WHERE</b> Collection=”gna”; 
+         <b>SELECT</b> * <b>FROM</b> Books <b>WHERE</b> Collection=”gna”; 
 
 5. Add a new user to your Users database (leave Book field blank). 
 
