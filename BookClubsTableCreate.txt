@@ -1,0 +1,146 @@
+/*This script does the following:
+	1. drops existing tables
+	2. creates the database table
+	3. populates the database table with sample data*/
+DROP TABLE locations cascade constraints;
+DROP TABLE staff cascade constraints;
+DROP TABLE clubs cascade constraints;
+DROP TABLE books cascade constraints;
+DROP TABLE booksRead cascade constraints;
+
+/*Runs correctly 9-14-22*/
+/*Makes a table to hold library locations*/
+CREATE TABLE locations (
+	llcode varchar2(3) NOT NULL,
+	libraryName varchar2(40) NOT NULL,
+	address varchar2(40),
+	phone varchar2(12),
+	category varchar2(12),
+	CONSTRAINT llcode_pk PRIMARY KEY (llcode)
+	);
+
+/*Runs correctly 9-14-22*/	
+/*Makes a table to hold library staff members and their information*/
+CREATE TABLE staff(
+	staffid int NOT NULL,
+	first_name varchar2(15) NOT NULL,
+	last_name varchar2(20) NOT NULL,
+	job_title varchar2(20),
+	CONSTRAINT staffid_pk PRIMARY KEY (staffid)
+	);
+
+/*Runs correctly 9-14-22*/
+/*Makes a table to hold books*/
+CREATE TABLE books (
+	isbn int NOT NULL,
+	title varchar2(40) NOT NULL,
+	author varchar2(20),
+	type varchar2(20),
+	CONSTRAINT isbn_pk PRIMARY KEY (isbn)
+);
+
+/*Runs correctly 9-14-22*/
+/*Makes a table to hold information about library book clubs*/
+CREATE TABLE clubs (
+	bcid int NOT NULL,
+	club_name varchar2(40),
+	meeting_cycle varchar2(20),
+	club_day varchar2(10),
+	meeting_time varchar2(12),
+	staffid int NOT NULL,
+	CONSTRAINT bcid_pk PRIMARY KEY (bcid),
+	CONSTRAINT staffid_fk FOREIGN KEY (staffid) REFERENCES staff(staffid)
+);	
+
+/*Runs correctly 9-14-22*/
+/*Makes a table with records of what each book club read and when*/
+CREATE TABLE booksRead (
+	bcid int,
+	isbn int NOT NULL,
+	month varchar2(10) NOT NULL,
+	year_read smallint,
+	llcode varchar2(3) NOT NULL,
+	CONSTRAINT booksread_pk PRIMARY KEY (bcid, isbn),
+	CONSTRAINT bcid_fk_booksRead FOREIGN KEY (bcid) REFERENCES clubs(bcid),
+	CONSTRAINT isbn_fk_booksRead FOREIGN KEY (isbn) REFERENCES books(isbn),
+	CONSTRAINT llcode_fk_booksRead FOREIGN KEY (llcode) REFERENCES locations(llcode)
+);
+
+
+
+/*Runs correctly 9-14-22*/
+/*Populating the library locations into table*/
+INSERT INTO locations
+	VALUES ('AWR', 'Allegra Westbrooks Library', '2412 Beatties Ford Rd', '704-416-3000', 'Regional'); 
+INSERT INTO locations
+	VALUES	('DAV', 'Davidson Library', '119 S Main St', '704-416-4000', 'Neighborhood');
+INSERT INTO locations
+	VALUES	('HG', 'Hickory Grove Library', '5935 Hickory Grove Rd', '704-416-4400', 'Community');
+INSERT INTO locations
+	VALUES ('IB', 'Independence Library', '6000 Conference Dr', '704-416-4800', 'Regional');
+INSERT INTO locations
+	VALUES ('ML', 'Main Library', '310 N Tryon St', '704-416-0101', 'Regional');
+INSERT INTO locations
+	VALUES ('MS', 'Matthews Library', '230 Matthews Station St', '704-416-5000', 'Community');
+INSERT INTO locations
+	VALUES ('MH', 'Mint Hill Library', '6840 Matthews-Mint Hill Road', '704-416-5200', 'Community');
+INSERT INTO locations
+	VALUES ('MTI', 'Mountain Island Library', '4420 Hoyt Galvin Way', '704-416-5600', 'Community');
+INSERT INTO locations
+	VALUES ('MPK', 'Myers Park Library', '1361 Queens Road', '704-416-5800', 'Neighborhood');
+INSERT INTO locations
+	VALUES ('NCO', 'North County Library', '16500 Holly Crest Ln', '704-416-6000', 'Regional');
+INSERT INTO locations
+	VALUES ('PM', 'Plaza Midwood Library', '1623 Central Avenue', '704-416-6200', 'Neighborhood');
+INSERT INTO locations
+	VALUES ('SB', 'South Blvd Library', '4429 South Boulevard', '704-416-6400', 'Community');
+INSERT INTO locations
+	VALUES ('SOR', 'South County Library', '5801 Rea Road', '704-416-6600', 'Regional');
+INSERT INTO locations
+	VALUES ('SPK', 'SouthPark Library', '7015 Carnegie Blvd', '704-416-5400', 'Regional');
+INSERT INTO locations
+	VALUES ('ST', 'Steele Creek Library', '13620 Steele Creek Road', '704-416-6800', 'Community');
+INSERT INTO locations
+	VALUES ('UC', 'University City Library', '301 East W.T. Harris Blvd', '704-416-7200', 'Regional');
+INSERT INTO locations
+	VALUES ('WBL', 'West Blvd Library', '2157 West Boulevard', '704-416-7400', 'Community');
+
+/*Populating the library staff into table*/
+INSERT INTO staff
+	VALUES (1051, 'Abby', 'Perry', 'Library Associate'); 
+INSERT INTO staff
+	VALUES	(1031, 'Alice', 'Smith', 'Library Manager');
+INSERT INTO staff
+	VALUES (1063, 'Alyssa', 'Vargas', 'Library Associate'); 
+INSERT INTO staff
+	VALUES	(1042, 'Ava', 'Moore', 'Library Manager');
+INSERT INTO staff
+	VALUES	(1053, 'Erin', 'Patterson', 'Library Assistant');
+INSERT INTO staff
+	VALUES	(1068, 'Tracy', 'Rowlings', 'Librarian');
+INSERT INTO staff
+	VALUES	(1054, 'Jackson', 'Howard', 'Library Associate');
+
+/*Populating books into table*/
+INSERT INTO books
+	VALUES (9780399590504, 'Educated: A memoir', 'Tara Westover', 'biography');
+INSERT INTO books
+	VALUES (9780735219090, 'Where the Crawdads Sing', 'Delia Owens', 'fiction');
+INSERT INTO books
+	VALUES (9781501171345, 'The Last Thing He Told Me', 'Laura Dave', 'fiction');
+INSERT INTO books
+	VALUES (9780735224292, 'Little Fires Everywhere', 'Celeste Ng', 'fiction');
+
+/*Populating book clubs into table*/
+INSERT INTO clubs
+	VALUES (101, '20 somethings Book Club', 'Monthly', 'Monday', 'morning', 1053);
+INSERT INTO clubs
+	VALUES (102, 'ABC Audiobooks Book Club', 'Every other month', 'Tuesday', 'evening', 1068);
+INSERT INTO clubs
+	VALUES (103, 'Adult Book Club', 'Monthly', 'Wednesday', 'afternoon', 1054);
+
+/*Populating books read by which book clubs and when into table*/
+INSERT INTO booksRead
+	VALUES (101, 9780399590504, 'January', 2021, 'PM'); 
+INSERT INTO booksRead
+	VALUES (101, 9780735224292, 'February', 2021, 'PM'); 
